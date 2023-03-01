@@ -97,12 +97,25 @@ export const views: ViewRoute[] = [
     path: 'user-task-view',
     component: 'user-task-view',
     icon: 'la la-user',
-    title: 'UserTask View',
+    title: 'My Task',
     action: async (_context, _command) => {
       if (!hasAccess(_context.route)) {
         return _command.redirect('login');
       }
       await import('./views/task/user-task-view');
+      return;
+    },
+  },
+  {
+    path: 'pool-task-view',
+    component: 'pool-task-view',
+    icon: 'la la-user',
+    title: 'Pool Task',
+    action: async (_context, _command) => {
+      if (!hasAccess(_context.route)) {
+        return _command.redirect('login');
+      }
+      await import('./views/task/pool-task-view');
       return;
     },
   },

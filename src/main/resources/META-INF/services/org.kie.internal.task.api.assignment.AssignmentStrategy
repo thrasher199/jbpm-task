@@ -1,0 +1,2 @@
+com.jbpmtask.application.component.CustomRoundRobinAssignmentStrategy
+com.jbpmtask.application.component.DirectAssignmentStrategy

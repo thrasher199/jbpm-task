@@ -39,12 +39,15 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
         logger.info("... generating 2 Role entities...");
         Role adminRole = new Role();
-        adminRole.setName("ADMIN");
-
+        adminRole.setName("admins");
         Role userRole = new Role();
-        userRole.setName("USER");
+        userRole.setName("user");
+        Role kieServer = new Role();
+        kieServer.setName("kie-server");
+        Role restAll = new Role();
+        restAll.setName("rest-all");
 
-        roleRepository.saveAll(Arrays.asList(adminRole, userRole));
+        roleRepository.saveAll(Arrays.asList(adminRole, userRole, kieServer, restAll));
 
 
         logger.info("... generating 2 User entities...");
@@ -53,6 +56,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         user.setUsername("user");
         user.setHashedPassword(passwordEncoder.encode("user"));
         user.addRole(userRole);
+        user.addRole(kieServer);
+        user.addRole(restAll);
         userRepository.save(user);
 
         User admin = new User();
@@ -61,6 +66,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         admin.setHashedPassword(passwordEncoder.encode("admin"));
         admin.addRole(userRole);
         admin.addRole(adminRole);
+        user.addRole(kieServer);
+        user.addRole(restAll);
         userRepository.save(admin);
 
         logger.info("Generated demo data");
